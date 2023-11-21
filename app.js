@@ -76,12 +76,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Remove the loading message
                 loadingMessageElement.remove();
 
-                console.error('Error communicating with the server', error);
+                let errorMessage = 'Oops! Something went wrong. Please try again.';
 
-                // Add error message to chat window
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    errorMessage = `Server responded with ${error.response.status} status. `;
+                    if (error.response.data && error.response.data.error) {
+                        errorMessage += `Error message: ${error.response.data.error}`;
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    errorMessage = 'No response received from the server.';
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    errorMessage = `Error setting up the request: ${error.message}`;
+                }
+
+                console.error('Error communicating with the server', error);
+                
+                // Add detailed error message to chat window
                 const errorMessageElement = document.createElement('div');
                 errorMessageElement.classList.add('message-bubble', 'error-message');
-                errorMessageElement.innerText = 'Oops! Something went wrong. Please try again.';
+                errorMessageElement.innerText = errorMessage;
                 chatMessages.appendChild(errorMessageElement);
 
                 // Scroll to the bottom of the chat window

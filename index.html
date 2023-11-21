@@ -22,13 +22,22 @@
             flex-direction: column;
         }
 
-        .table-container {
-            flex: 1;
+        .chat-container {
             order: 1;
+            flex: 1;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .message-bubble {
+            background-color: #e5e5ea;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
         }
 
         #table {
@@ -46,20 +55,7 @@
             background-color: #f2f2f2;
         }
 
-        .card {
-            border: none;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .chat-container {
-            order: 2;
-            flex: 1.5;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        #chat-window {
+        .chat-window {
             flex: 1;
             border: 1px solid #ddd;
             background-color: #fff;
@@ -93,7 +89,7 @@
         }
 
         @media (max-width: 768px) {
-            .table-container, .chat-container {
+            .chat-container {
                 order: initial;
                 flex: 1;
                 max-width: none;
@@ -104,18 +100,18 @@
 <body>
 
 <div class="wrapper">
-    <div class="table-container">
-        <h1 class="text-center mb-4">Financial Dashboard</h1>
-        <div class="card">
-            <h3 class="card-header text-center font-weight-bold text-uppercase py-4">DEMO FINTALK</h3>
-            <div class="card-body">
-                <table id="table" class="table table-bordered table-responsive-md table-striped text-center"></table>
+    <div class="chat-container">
+        <div class="message-bubble">
+            <h1 class="text-center mb-4">Financial Dashboard</h1>
+            <div class="card">
+                <h3 class="card-header text-center font-weight-bold text-uppercase py-4">DEMO FINTALK</h3>
+                <div class="card-body">
+                    <table id="table" class="table table-bordered table-responsive-md table-striped text-center"></table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="chat-container">
-        <div id="chat-window">
+        <div class="chat-window">
             <div class="main-title">CHAT BOT USING CHAT-GPT</div>
             <div id="chat-messages"></div>
             <form id="chat-form">

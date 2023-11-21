@@ -1,39 +1,59 @@
-const form = document.getElementById("chat-form");
-const input = document.getElementById("chat-input");
-const messages = document.getElementById("chat-messages");
-const apiKey = "";
+document.addEventListener('DOMContentLoaded', function () {
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = input.value;
-  input.value = "";
+    const $tableID = $('#table');
 
-  messages.innerHTML += `<div class="message user-message">
-  <img src="./icons/user.png" alt="user icon"> <span>${message}</span>
-  </div>`;
-
-  // Use axios library to make a POST request to the OpenAI API
-  const response = await axios.post(
-    "https://api.openai.com/v1/completions",
-    {
-      prompt: message,
-      model: "text-davinci-003",
-      temperature: 0,
-      max_tokens: 1000,
-      top_p: 1,
-      frequency_penalty: 0.0,
-      presence_penalty: 0.0,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
+    // Function to populate the table with data
+    function populateTable() {
+        // ... (Your existing table population logic)
     }
-  );
-  const chatbotResponse = response.data.choices[0].text;
 
-  messages.innerHTML += `<div class="message bot-message">
-  <img src="./icons/chatbot.png" alt="bot icon"> <span>${chatbotResponse}</span>
-  </div>`;
+    // Initial population
+    populateTable();
+
+    chatForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const userMessage = chatInput.value.trim();
+        if (userMessage === '') return;
+
+        // Add user message to chat window
+        const userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('message-bubble', 'user-message');
+        userMessageElement.innerText = userMessage;
+        chatMessages.appendChild(userMessageElement);
+
+        // Clear input
+        chatInput.value = '';
+
+        // Make request to your server
+        axios
+            .post('/getChatResponse', {
+                userMessage,
+                tableData, // Include your table data here
+            })
+            .then((response) => {
+                const aiMessage = response.data.aiMessage;
+
+                // Add AI message to chat window
+                const aiMessageElement = document.createElement('div');
+                aiMessageElement.classList.add('message-bubble', 'ai-message');
+                aiMessageElement.innerText = aiMessage;
+                chatMessages.appendChild(aiMessageElement);
+
+                // Optionally, update the table data based on the AI response
+                updateTableData(aiMessage);
+
+                // Scroll to the bottom of the chat window
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            })
+            .catch((error) => console.error('Error communicating with the server', error));
+    });
+
+    // Function to update table data based on AI response
+    function updateTableData(aiResponse) {
+        // ... (Your existing table data update logic)
+    }
 });

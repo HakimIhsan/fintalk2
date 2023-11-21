@@ -5,9 +5,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const $tableID = $('#table');
 
+    // Sample data array
+    let tableData = [
+        { name: "Salary (Rp.)", Jan: 10000000, Feb: 10000000, Mar: 10000000, Apr: 10000000 },
+        { name: "Biaya Kuliah", Jan: 1000000, Feb: 1000000, Mar: 1000000, Apr: 1000000 },
+        { name: "Spent Jajan", Jan: 300000, Feb: 5000000, Mar: 0, Apr: 30000 },
+        // Add more rows as needed
+    ];
+
     // Function to populate the table with data
     function populateTable() {
-        // ... (Your existing table population logic)
+        tableData.forEach((rowData) => {
+            const $newRow = $('<tr></tr>');
+            for (const key in rowData) {
+                $newRow.append(`<td class="pt-3-half" contenteditable="true">${rowData[key]}</td>`);
+            }
+            $tableID.append($newRow);
+        });
     }
 
     // Initial population
@@ -32,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         axios
             .post('/getChatResponse', {
                 userMessage,
-                tableData, // Include your table data here
+                tableData,
             })
             .then((response) => {
                 const aiMessage = response.data.aiMessage;
@@ -44,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 chatMessages.appendChild(aiMessageElement);
 
                 // Optionally, update the table data based on the AI response
-                updateTableData(aiMessage);
+                updateTableData(response.data.aiMessage);
 
                 // Scroll to the bottom of the chat window
                 chatMessages.scrollTop = chatMessages.scrollHeight;

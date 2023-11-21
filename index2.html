@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .left,
+        .right {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .left {
+            order: 1;
+        }
+
+        .right {
+            order: 2;
+        }
+
+        .right-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-window {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        #chat-form {
+            display: flex;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="left">
+    <h1>Left Content</h1>
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+            DEMO FINTALK
+        </h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+               <span class="table-add float-right mb-3 mr-2">
+          <a href="#!" class="text-success">
+            <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+          </a>
+        </span>
+        <table class="table table-bordered table-responsive-md table-striped text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Name</th>
+              <th class="text-center">Jan</th>
+              <th class="text-center">Feb</th>
+              <th class="text-center">Mar</th>
+              <th class="text-center">Apr</th>
+              <th class="text-center">Sort</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pt-3-half" contenteditable="true">Salary (Rp.)</td>
+              <td class="pt-3-half" contenteditable="true">10000000</td>
+              <td class="pt-3-half" contenteditable="true">10000000</td>
+              <td class="pt-3-half" contenteditable="true">10000000</td>
+              <td class="pt-3-half" contenteditable="true">10000000</td>
+              <td class="pt-3-half">
+                <span class="table-up">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i>
+                  </a>
+                </span>
+                <span class="table-down">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i>
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="table-remove">
+                  <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                </span>
+              </td>
+            </tr>
+            <!-- This is our clonable table line -->
+            <tr>
+              <td class="pt-3-half" contenteditable="true">Biaya Kuliah</td>
+              <td class="pt-3-half" contenteditable="true">1000000</td>
+              <td class="pt-3-half" contenteditable="true">1000000</td>
+              <td class="pt-3-half" contenteditable="true">1000000</td>
+              <td class="pt-3-half" contenteditable="true">1000000</td>
+              <td class="pt-3-half">
+                <span class="table-up">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i>
+                  </a>
+                </span>
+                <span class="table-down">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i>
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="table-remove">
+                  <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                </span>
+              </td>
+            </tr>
+            <!-- This is our clonable table line -->
+            <tr>
+              <td class="pt-3-half" contenteditable="true">Spent Jajan</td>
+              <td class="pt-3-half" contenteditable="true">300000</td>
+              <td class="pt-3-half" contenteditable="true">5000000</td>
+              <td class="pt-3-half" contenteditable="true">0</td>
+              <td class="pt-3-half" contenteditable="true">30000</td>
+              <td class="pt-3-half">
+                <span class="table-up">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i>
+                  </a>
+                </span>
+                <span class="table-down">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i>
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="table-remove">
+                  <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                </span>
+              </td>
+            </tr>
+            <!-- This is our clonable table line -->
+            <tr class="hide">
+              <td class="pt-3-half" contenteditable="true">Loan/Debt</td>
+              <td class="pt-3-half" contenteditable="true">1000000</td>
+              <td class="pt-3-half" contenteditable="true">500000</td>
+              <td class="pt-3-half" contenteditable="true">0</td>
+              <td class="pt-3-half" contenteditable="true">0</td>
+              <td class="pt-3-half">
+                <span class="table-up">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i>
+                  </a>
+                </span>
+                <span class="table-down">
+                  <a href="#!" class="indigo-text">
+                    <i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i>
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="table-remove">
+                  <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="right">
+    <h1>Right Content</h1>
+    <div class="right-content">
+        <div id="chat-window">
+            <div class="main-title">CHAT BOT USING CHAT-GPT</div>
+            <div id="chat-messages"></div>
+            <form id="chat-form">
+                <input
+                        type="text"
+                        id="chat-input"
+                        autocomplete="off"
+                        placeholder="Type your message here"
+                        required
+                />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+<script src="app.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    const $tableID = $('#table');
+    const $BTN = $('#export-btn');
+    const $EXPORT = $('#export');
+    const newTr = `
+      <tr class="hide">
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half">
+          <span class="table-up">
+            <a href="#!" class="indigo-text">
+              <i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i>
+            </a>
+          </span>
+          <span class="table-down">
+            <a href="#!" class="indigo-text">
+              <i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i>
+            </a>
+          </span>
+        </td>
+        <td>
+          <span class="table-remove">
+            <button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button>
+          </span>
+        </td>
+      </tr>
+    `;
+    $('.table-add').on('click', 'i', () => {
+      const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+      if ($tableID.find('tbody tr').length === 0) {
+        $('tbody').append(newTr);
+      }
+      $tableID.find('table').append($clone);
+    });
+    $tableID.on('click', '.table-remove', function () {
+      $(this).parents('tr').detach();
+    });
+    $tableID.on('click', '.table-up', function () {
+      const $row = $(this).parents('tr');
+      if ($row.index() === 0) {
+        return;
+      }
+      $row.prev().before($row.get(0));
+    });
+    $tableID.on('click', '.table-down', function () {
+      const $row = $(this).parents('tr');
+      $row.next().after($row.get(0));
+    });
+
+    // A few jQuery helpers for exporting
+    jQuery.fn.pop = [].pop;
+    jQuery.fn.shift = [].shift;
+
+    $BTN.on('click', () => {
+      const $rows = $tableID.find('tr:not(:hidden)');
+      const headers = [];
+      const data = [];
+
+      // Get the headers
+      $($rows.shift()).find('th:not(:empty)').each(function () {
+        headers.push($(this).text().toLowerCase());
+      });
+
+      // Turn all existing rows into a loopable array
+      $rows.each(function () {
+        const $td = $(this).find('td');
+        const h = {};
+
+        // Use the headers from earlier to name our hash keys
+        headers.forEach((header, i) => {
+          h[header] = $td.eq(i).text();
+        });
+
+        data.push(h);
+      });
+
+      // Output the result
+      $EXPORT.text(JSON.stringify(data));
+    });
+</script>
+</body>
+</html>

@@ -42,6 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
         // Clear input
         chatInput.value = '';
 
+        // Add loading message to chat window
+        const loadingMessageElement = document.createElement('div');
+        loadingMessageElement.classList.add('message-bubble', 'loading-message');
+        loadingMessageElement.innerText = 'AI is processing...';
+        chatMessages.appendChild(loadingMessageElement);
+
         // Make request to your server
         axios
             .post('/getChatResponse', {
@@ -49,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tableData,
             })
             .then((response) => {
+                // Remove the loading message
+                loadingMessageElement.remove();
+
                 const aiMessage = response.data.aiMessage;
 
                 // Add AI message to chat window
@@ -63,7 +72,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Scroll to the bottom of the chat window
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             })
-            .catch((error) => console.error('Error communicating with the server', error));
+            .catch((error) => {
+                // Remove the loading message
+                loadingMessageElement.remove();
+
+                console.error('Error communicating with the server', error);
+
+                // Add error message to chat window
+                const errorMessageElement = document.createElement('div');
+                errorMessageElement.classList.add('message-bubble', 'error-message');
+                errorMessageElement.innerText = 'Oops! Something went wrong. Please try again.';
+                chatMessages.appendChild(errorMessageElement);
+
+                // Scroll to the bottom of the chat window
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
     });
 
     // Function to update table data based on AI response

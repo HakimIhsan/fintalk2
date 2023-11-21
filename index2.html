@@ -14,46 +14,48 @@
             height: 100vh;
         }
 
-/*         .left,
+        .left,
         .right {
             flex: 1;
             padding: 20px;
-        } */
+        }
 
         .left {
             order: 1;
         }
 
         .right {
-            order: 2;
-            flex: 2; /* Adjust the flex property to make it larger */
-            display: flex;
-            flex-direction: column;
-        }
+    		order: 2;
+    		flex: 2; /* Adjust the flex property to make it larger */
+    		display: flex;
+    		flex-direction: column;
+		}
 
+		.right-content {
+    		height: 100%;
+    		display: flex;
+    		flex-direction: column;
+		}
 
-        .right-content {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+		#chat-window {
+    		flex: 1;
+    		border: 1px solid #ccc;
+    		padding: 10px;
+    		overflow-y: auto;
+    		overflow-x: hidden; /* Ensure horizontal overflow is hidden */
+		}
 
-        #chat-window {
-            flex: 1;
-            border: 1px solid #ccc;
-/*             padding: 10px; */
-            overflow-y: auto;
-        }
+		#chat-form {
+    		display: flex;
+    		align-items: center; /* Center the input and button vertically */
+		}
 
-        #chat-form {
-            display: flex;
-        }
+		#chat-input {
+    		flex: 1;
+    		padding: 5px;
+    		margin-right: 5px;
+		}
 
-        #chat-input {
-            flex: 1;
-            padding: 5px;
-            margin-right: 5px;
-        }
     </style>
 </head>
 <body>
